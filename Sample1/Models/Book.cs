@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sample1.Models {
     public class Book {
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public long BookId { get; set; }
         [Required]
         public string Title { get; set; }
