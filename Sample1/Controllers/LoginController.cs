@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sample1.Interfaces;
 using Sample1.Models;
 
 namespace Sample1.Controllers {
@@ -8,17 +9,19 @@ namespace Sample1.Controllers {
     [Authorize]
     
     public class LoginController : ControllerBase {
-        private AuthService auth;
+        private IJwtService jwt;
+        private IAuthService auth;
 
-        public LoginController(AuthService service) {
-            auth = service;
+        public LoginController(IJwtService jwtService,IAuthService authService) {
+            jwt = jwtService;
+            auth = authService;
         }
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
         public IActionResult authenticate([FromBody]User userparam) {
             if (auth.Authenticate(userparam.username, userparam.password))
-                return Ok(auth.GenerateToken(userparam.username));
+                return Ok(jwt.GenerateToken(userparam.username));
             else
                 return BadRequest(new { message = "username or password is incorrect" });
         }

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Sample1.Controllers;
+using Sample1.Interfaces;
 using Sample1.Models;
 using Sample1.Setting;
 
@@ -46,7 +47,6 @@ namespace Sample1 {
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x => {
-                x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
@@ -57,7 +57,8 @@ namespace Sample1 {
             });
 
             // configure DI for application services
-            services.AddScoped<AuthService, JWTAuthenticate>();
+            services.AddTransient<IAuthService, SimpleUserAuth>();
+            services.AddScoped<IJwtService, JWTAuthenticate>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

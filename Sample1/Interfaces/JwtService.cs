@@ -8,24 +8,16 @@ using System.Security.Claims;
 using System.Text;
 
 namespace Sample1.Controllers {
-    public interface AuthService {
-        bool Authenticate(string username, string password);
+    public interface IJwtService {       
         string GenerateToken(string username);
     }
 
-    public class JWTAuthenticate : AuthService {
+    public class JWTAuthenticate : IJwtService {
         // users hardcoded for simplicity
         private readonly JWTtoken jwtToken;
 
         public JWTAuthenticate(IOptions<JWTtoken> token) {
             jwtToken = token.Value;
-        }
-
-        public bool Authenticate(string username, string password) {
-            if (username == "abc" && password == "123") {
-                return true;
-            }
-            return false;
         }
 
         public string GenerateToken(string username) {            

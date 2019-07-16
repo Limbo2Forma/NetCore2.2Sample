@@ -11,7 +11,7 @@ using Sample1.Models.DTOs;
 
 namespace Sample1.Controllers {
     [Route("api/books")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class BooksController : ControllerBase {
         private readonly BookContext _context;
