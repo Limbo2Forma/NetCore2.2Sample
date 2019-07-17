@@ -18,12 +18,6 @@ namespace Sample1.Controllers {
 
         public BooksController(BookContext context) {
             _context = context;
-            if (_context.Authors.Count() == 0) {
-                _context.populateAuthors();
-            }
-            if (_context.Books.Count() == 0) {
-                _context.populateBooks();
-            }
         }
 
         private static readonly Expression<Func<Book, BookDTO>> AsBookDTO =
