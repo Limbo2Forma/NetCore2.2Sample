@@ -29,7 +29,6 @@ namespace Sample1 {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddDbContext<BookContext>(opt => opt.UseInMemoryDatabase("BookList"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<BookContext>(options =>
