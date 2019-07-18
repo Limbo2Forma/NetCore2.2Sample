@@ -19,7 +19,7 @@ namespace Sample1.Controllers {
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
-        public IActionResult authenticate([FromBody]User userparam) {
+        public IActionResult Authenticate([FromBody]User userparam) {
             if (auth.Authenticate(userparam.username, userparam.password))
                 return Ok(jwt.GenerateToken(userparam.username));
             else

@@ -12,7 +12,7 @@ namespace Sample1.Models {
         public string Genre { get; set; }
         public DateTime PublishDate { get; set; }
         public string Description { get; set; }
-        public long AuthorId { get; set; }
+        public long? AuthorId { get; set; }
         [ForeignKey("AuthorId")]
         public Author Author { get; set; }
     }

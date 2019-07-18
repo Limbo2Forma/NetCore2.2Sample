@@ -70,8 +70,7 @@ namespace Sample1.Controllers {
         // GET: api/Books/Fantasy
         [HttpGet("{genre}")]
         public async Task<ActionResult<IEnumerable<BookDTO>>> GetBooksByGenre(string genre) {
-            return await _context.Books.Include(b => b.Author)
-                .Where(b => b.Genre.Equals(genre, StringComparison.OrdinalIgnoreCase))
+            return await _context.Books.FromSql($"GetBooksByGenre {genre}")
                 .Select(AsBookDTO).ToListAsync();
         }
 
@@ -120,7 +119,8 @@ namespace Sample1.Controllers {
 
         // POST: api/Books
         [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book book) {
+        public async Task<ActionResult<BookDetailDTO>> PostBook([FromBody] Book book) {
+
             _context.Books.Add(book);
             await _context.SaveChangesAsync();
 
@@ -129,7 +129,7 @@ namespace Sample1.Controllers {
 
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Book>> DeleteBook(int id) {
+        public async Task<ActionResult<Book>> DeleteBook(long id) {
             var book = await _context.Books.FindAsync(id);
             if (book == null)
             {
