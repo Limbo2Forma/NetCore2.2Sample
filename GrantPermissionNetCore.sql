@@ -8,5 +8,5 @@ GO
 CREATE USER [BookUser] 
   FOR LOGIN [IIS APPPOOL\NetCore]
 GO
-EXEC sp_addrolemember 'db_owner', 'BookUser'
+EXEC sp_addrolemember 'db_datareader', 'BookUser'
 GO
