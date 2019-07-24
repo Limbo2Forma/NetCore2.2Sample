@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Sample1.Models {
     public class BookContext : DbContext {
-        public BookContext(DbContextOptions<BookContext> options) 
-            : base(options) { }
+        public BookContext(DbContextOptions<BookContext> options) : base(options) { }
 
         public DbSet<Sample1.Models.Book> Books { get; set; }
 
