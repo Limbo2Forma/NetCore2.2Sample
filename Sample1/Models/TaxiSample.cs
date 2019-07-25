@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Sample1.Models
-{
+namespace Sample1.Models {
     public class TaxiSample {
         public long Id { get; set; }
         public string Medallion { get; set; }
