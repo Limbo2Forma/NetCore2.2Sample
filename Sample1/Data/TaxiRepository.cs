@@ -13,7 +13,6 @@ namespace Sample1.Data {
         public TaxiRepository(IConfiguration config) {
             _config = config;
         }
-
         public IDbConnection Connection {
             get {
                 return new System.Data.SqlClient.SqlConnection
@@ -41,9 +40,8 @@ namespace Sample1.Data {
 
         public async Task<decimal> CalculateDistanceOfTrip(long id) {
             using (IDbConnection conn = Connection) {
-                string sQuery = 
-                    "SELECT dbo.fnCalculateDistance(pickup_longitude,pickup_latitude," +
-                    "dropoff_longitude,dropoff_latitude) FROM dbo.TaxiSample WHERE Id = @id";
+                string sQuery =
+                    "EXEC dbo.CalculateDistanceTrip @Id = @id";
                 conn.Open();
                 var result = await conn.QueryAsync<decimal>(sQuery, new { id });
                 return result.First();
