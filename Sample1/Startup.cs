@@ -27,8 +27,8 @@ namespace Sample1 {
             services.AddDbContext<BookContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookContext")));
 
-            services.AddDbContext<TaxiContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("TaxiContext")));
+            //services.AddDbContext<TaxiContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("TaxiContext")));
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("JWTtoken");
@@ -52,11 +52,9 @@ namespace Sample1 {
             });
 
             // configure DI for application services
+            services.AddScoped<ITaxiRepository, Data.TaxiRepository>();
             services.AddTransient<IAuthService, SimpleUserAuth>();
             services.AddScoped<IJwtService, JWTAuthenticate>();
-
-    services.AddDbContext<TaxiContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("TaxiContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
