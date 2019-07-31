@@ -40,10 +40,9 @@ namespace Sample1.Data {
 
         public async Task<decimal> CalculateDistanceOfTrip(long id) {
             using (IDbConnection conn = Connection) {
-                string sQuery =
-                    "EXEC dbo.CalculateDistanceTrip @Id = @id";
                 conn.Open();
-                var result = await conn.QueryAsync<decimal>(sQuery, new { id });
+                var result = await conn.QueryAsync<decimal>("CalculateDistanceTrip", new { id },
+                    commandType: CommandType.StoredProcedure);
                 return result.First();
             }
         }
